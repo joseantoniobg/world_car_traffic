@@ -1,4 +1,6 @@
 const myCanvas = document.getElementById("myCanvas");
+const mousex = document.getElementById("mousex");
+const mousey = document.getElementById("mousey");
 
 myCanvas.width = 600;
 myCanvas.height = 600;
@@ -16,11 +18,63 @@ const s3 = new Segment(p1, p4);
 const s4 = new Segment(p3, p2);
 
 const graph = new Graph([p1, p2, p3, p4], [s1, s2, s3, s4]);
+const viewPort = new ViewPort(myCanvas, graph);
+const graphEditor = new GraphEditor(myCanvas, graph, { mousex, mousey  });
 
-graph.draw(ctx);
+animate();
 
-function addRandomPoint() {
-  graph.addPoint(new Point(Math.random() * myCanvas.width, Math.random() * myCanvas.height));
+function animate() {
   ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-  graph.draw(ctx);
+  graphEditor.display();
+  requestAnimationFrame(animate);
 }
+
+// graph.draw(ctx);
+
+// function redraw() {
+//   ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+//   graph.draw(ctx);
+// }
+
+// function addRandomPoint() {
+//   const resp = graph.tryAddPoint(new Point(Math.random() * myCanvas.width, Math.random() * myCanvas.height));
+//   if (resp) {
+//     redraw();
+//   }
+//   console.log(resp);
+// }
+
+// function addRandomSegment() {
+//   const index1 = Math.floor(Math.random() * graph.points.length);
+//   const index2 = Math.floor(Math.random() * graph.points.length);
+//   const success = graph.tryAddSegment(new Segment(graph.points[index1], graph.points[index2]));
+
+//   if (success) {
+//     redraw();
+//   }
+
+//   console.log(success);
+// }
+
+// function removeRandomSegment() {
+//   if (graph.segments.length === 0) {
+//     return;
+//   }
+//   const index = Math.floor(Math.random() * graph.segments.length);
+//   graph.removeSegment(graph.segments[index]);
+//   redraw();
+// }
+
+// function removeRandomPoint() {
+//   if (graph.points.length === 0) {
+//     return;
+//   }
+//   const index = Math.floor(Math.random() * graph.points.length);
+//   graph.removePoint(graph.points[index]);
+//   redraw();
+// }
+
+// function removeAll() {
+//   graph.dispose();
+//   redraw();
+// }
