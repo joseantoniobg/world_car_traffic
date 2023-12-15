@@ -14,20 +14,21 @@
         <div class="info-item" id="mousex">0</div>
         <div class="info-item" id="mousey">0</div>
       </div>
+      <div id="controls">
+        <button onclick="dispose()">🗑️ Dispose Graph</button>
+        <button onclick="save()">💾 Save Graph</button>
+       </div>
     </div>
-    </div>
-    <div id="controls">
-      <!-- <button onclick="addRandomPoint()">Add Point</button>
-      <button onclick="addRandomSegment()">Add Segment</button>
-      <button onclick="removeRandomSegment()">Remove Segment</button>
-      <button onclick="removeRandomPoint()">Remove Point</button>
-      <button onclick="removeAll()">Remove Graph</button> -->
     </div>
     <script src="./js/primitives/point.js"></script>
     <script src="./js/primitives/segment.js"></script>
+    <script src="./js/primitives/polygon.js"></script>
+    <script src="./js/primitives/envelope.js"></script>
     <script src="./js/math/graph.js"></script>
     <script src="./js/math/utils.js"></script>
     <script src="./js/graphEditor.js"></script>
+    <script src="./js/viewPort.js"></script>
+    <script src="./js/world.js"></script>
     <script src="./js/script.js"></script>
   </body>
 </html>
