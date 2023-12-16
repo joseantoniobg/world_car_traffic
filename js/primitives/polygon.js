@@ -41,6 +41,43 @@ class Polygon {
     }
   }
 
+  static union(polys) {
+    Polygon.multiBreak(polys);
+    const keptSegments = [];
+    for (let i = 0; i < polys.length; i++) {
+      for (const seg of polys[i].segments) {
+        let keep = true;
+        for (let j = 0; j < polys.length; j++) {
+          if (i != j && polys[j].containsSegment(seg)) {
+            keep = false;
+            break;
+          }
+        }
+        if (keep) {
+          keptSegments.push(seg);
+        }
+      }
+    }
+    return keptSegments;
+  }
+
+  containsSegment(seg) {
+    const midPoint = average(seg.p1, seg.p2);
+    return this.containsPoint(midPoint);
+  }
+
+  containsPoint(point) {
+    const outerPoint = new Point(-1000, -1000);
+    let intersectionCount = 0;
+    for (const seg of this.segments) {
+      const intersection = getIntersection(outerPoint, point, seg.p1, seg.p2);
+      if (intersection) {
+        intersectionCount++;
+      }
+    }
+    return intersectionCount % 2 == 1;
+  }
+
   drawSegments(ctx) {
     for (const seg of this.segments) {
       seg.draw(ctx, { color: getRandomColor(), width: 5 });
