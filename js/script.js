@@ -1,6 +1,8 @@
 const myCanvas = document.getElementById("myCanvas");
 const mousex = document.getElementById("mousex");
 const mousey = document.getElementById("mousey");
+const showHideGraphElementsButton = document.getElementById("showHideGraphElements");
+let globalAlpha = 1;
 
 myCanvas.width = 600;
 myCanvas.height = 600;
@@ -20,7 +22,7 @@ function animate() {
   viewPort.reset();
   world.generate();
   world.draw(ctx);
-  ctx.globalAlpha = 0.3;
+  ctx.globalAlpha = globalAlpha;
   graphEditor.display();
   requestAnimationFrame(animate);
 }
@@ -31,4 +33,15 @@ function dispose() {
 
 function save() {
   localStorage.setItem("graph", JSON.stringify(graph));
+}
+
+function showHideGraphElements() {
+  if (showHideGraphElementsButton.innerText.startsWith('Hide')) {
+    globalAlpha = 0;
+    showHideGraphElementsButton.innerText = "Show Graph Editing Elements";
+    return;
+  }
+
+  globalAlpha = 1;
+  showHideGraphElementsButton.innerText = "Hide Graph Editing Elements";
 }

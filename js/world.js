@@ -1,13 +1,30 @@
 class World {
-  constructor(graph, roadWidth = 60, roadRoundness = 20) {
+  constructor(graph,
+              roadWidth = 60,
+              roadRoundness = 20,
+              buildingWidth = 150,
+              buldingMinLength = 100,
+              spacing = 50,
+    ) {
     this.graph = graph;
     this.roadWidth = roadWidth;
     this.roadRoundness = roadRoundness;
+    this.buildingWidth = buildingWidth;
+    this.buldingMinLength = buldingMinLength;
+    this.spacing = spacing;
 
     this.envelopes = [];
     this.roadBorders = [];
+    this.buildings = [];
 
     this.generate();
+  }
+
+  #generateBuildings() {
+    const tempEnvelopes = [];
+    for (const seg of this.graph.segments) {
+      tempEnvelopes.push(new Envelope(seg, this.roadWidth, this.roadRoundness));
+    }
   }
 
   generate() {
