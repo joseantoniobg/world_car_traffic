@@ -69,3 +69,11 @@ function getRandomColor() {
   const hue = 290 + Math.random() * 260;
   return 'hsl(' + hue + ', 100%, 60%)';
 }
+
+function normalize(p) {
+  return scale(p, 1 / magnitude(p));
+}
+
+function magnitude(p) {
+  return Math.hypot(p.x, p.y);
+}
